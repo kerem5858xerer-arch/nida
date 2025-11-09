@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sana Özel ❤️</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #000;
+      overflow: hidden;
+      height: 100vh;
+      font-family: 'Pacifico', cursive;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+
+    .container {
+      text-align: center;
+      z-index: 10;
+    }
+
+    h1 {
+      font-size: 4.5rem;
+      margin-bottom: 15px;
+      text-shadow: 0 0 30px #ff1493, 0 0 60px #ff1493;
+      animation: glow 2s infinite alternate;
+    }
+
+    p {
+      font-size: 1.6rem;
+      max-width: 90%;
+      opacity: 0;
+      animation: fadeIn 2s forwards 1.5s;
+      text-shadow: 0 0 10px rgba(255,20,147,0.8);
+    }
+
+    .heart {
+      position: absolute;
+      width: 60px;
+      height: 60px;
+      background: #ff1493;
+      transform: rotate(-45deg);
+      animation: float 5s infinite ease-in-out;
+      box-shadow: 0 0 25px #ff1493;
+      cursor: pointer;
+    }
+
+    .heart:before,
+    .heart:after {
+      content: '';
+      width: 60px;
+      height: 60px;
+      position: absolute;
+      border-radius: 50%;
+      background: #ff1493;
+    }
+
+    .heart:before { top: -30px; left: 0; }
+    .heart:after { left: 30px; top: 0; }
+
+    .snow {
+      position: absolute;
+      color: #fff;
+      font-size: 1.5rem;
+      animation: snow 8s linear infinite;
+      pointer-events: none;
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 20px #ff1493; }
+      to { text-shadow: 0 0 50px #ff1493, 0 0 80px #ff69b4; }
+    }
+
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+
+    @keyframes float {
+      0% { transform: translateY(120vh) rotate(-45deg); opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { transform: translateY(-100px) rotate(-45deg); opacity: 0; }
+    }
+
+    @keyframes snow {
+      0% { transform: translateY(-100px) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+    }
+
+    .boom {
+      position: absolute;
+      font-size: 3rem;
+      pointer-events: none;
+      animation: explode 1s forwards;
+    }
+
+    @keyframes explode {
+      0% { transform: scale(0); opacity: 1; }
+      100% { transform: scale(3); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1 id="name">ELİF</h1>
+    <p id="message">Tanıştığımıza çok mutluyum, seninle konuşmak günümü güzelleştirdi ❤️</p>
+  </div>
+
+  <audio id="music" loop>
+    <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_883a2d6b9c.mp3?filename=romantic-piano-11027.mp3" type="audio/mp3">
+  </audio>
+
+  <script>
+    // === KIZIN ADI VE MESAJINI BURAYA YAZ ===
+    const KIZ_ADI = "ELİF";  // ← DEĞİŞTİR
+    const MESAJ = "Senin gülüşünle tanıştım, şimdi her şey daha güzel ❤️"; // ← DEĞİŞTİR
+    // =========================================
+
+    document.getElementById("name").textContent = KIZ_ADI;
+    document.getElementById("message").textContent = MESAJ;
+
+    // Kalp yağmuru
+    setInterval(() => {
+      const h = document.createElement("div");
+      h.classList.add("heart");
+      h.style.left = Math.random() * 100 + "vw";
+      h.style.animationDuration = (Math.random() * 3 + 4) + "s";
+      h.onclick = () => explode(h);
+      document.body.appendChild(h);
+      setTimeout(() => h.remove(), 7000);
+    }, 400);
+
+    // Kar efekti (romantik!)
+    setInterval(() => {
+      const s = document.createElement("div");
+      s.classList.add("snow");
+      s.textContent = "❅";
+      s.style.left = Math.random() * 100 + "vw";
+      s.style.animationDuration = (Math.random() * 5 + 5) + "s";
+      s.style.fontSize = Math.random() * 20 + 15 + "px";
+      document.body.appendChild(s);
+      setTimeout(() => s.remove(), 10000);
+    }, 300);
+
+    // Tıklayınca patlama
+    function explode(el) {
+      const boom = document.createElement("div");
+      boom.classList.add("boom");
+      boom.textContent = "💖";
+      boom.style.left = (el.offsetLeft + 30) + "px";
+      boom.style.top = (el.offsetTop + 30) + "px";
+      document.body.appendChild(boom);
+      el.remove();
+      setTimeout(() => boom.remove(), 1000);
+    }
+
+    // Otomatik müzik (sessiz başlasın, tıklayınca açılsın)
+    const audio = document.getElementById("music");
+    let played = false;
+    document.body.addEventListener("click", () => {
+      if (!played) {
+        audio.volume = 0.3;
+        audio.play().catch(() => {});
+        played = true;
+      }
+    });
+  </script>
+</body>
+</html>
