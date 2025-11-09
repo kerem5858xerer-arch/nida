@@ -4,76 +4,122 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>NİDA ❤️</title>
-  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@600&display=swap" rel="stylesheet">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body, html { height: 100%; overflow: hidden; }
-    
-    /* OTOMATİK VİDEO (GitHub dışı, hızlı yüklenir) */
+
+    /* VİDEO ARKA PLAN */
     #bgVideo {
       position: fixed;
       top: 0; left: 0;
       width: 100%; height: 100%;
       object-fit: cover;
       z-index: -1;
-      filter: brightness(0.75);
+      filter: brightness(0.8);
     }
 
     .container {
       position: relative;
       z-index: 10;
       text-align: center;
-      padding: 20px;
+      padding: 25px;
       max-width: 90%;
-      backdrop-filter: blur(15px);
-      background: rgba(0,0,0,0.45);
-      border-radius: 30px;
-      box-shadow: 0 0 70px rgba(255,20,147,0.6);
-      margin-top: 20vh;
+      margin: 15vh auto 0;
+      backdrop-filter: blur(12px);
+      background: rgba(0,0,0,0.35);
+      border-radius: 25px;
+      box-shadow: 0 0 60px rgba(255,20,147,0.5);
     }
 
     h1 {
       font-family: 'Dancing Script', cursive;
-      font-size: 5.2rem;
-      background: linear-gradient(45deg, #ff1493, #ff69b4, #fff);
+      font-size: clamp(2.5rem, 8vw, 5rem);
+      margin-bottom: 20px;
+      background: linear-gradient(45deg, #ff1493, #ff69b4);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      text-shadow: 0 0 50px #ff1493;
+      text-shadow: 0 0 30px #ff1493;
       animation: neon 2s infinite;
     }
 
     @keyframes neon {
-      0%, 100% { text-shadow: 0 0 25px #ff1493; }
-      50% { text-shadow: 0 0 70px #ff1493, 0 0 140px #ff69b4; }
+      0%, 100% { text-shadow: 0 0 20px #ff1493; }
+      50% { text-shadow: 0 0 50px #ff1493, 0 0 100px #ff69b4; }
     }
 
-    .question { font-size: 2.1rem; margin: 40px 0; font-weight: bold; color: #fff; }
-    .buttons { display: flex; gap: 35px; justify-content: center; flex-wrap: wrap; margin-top: 50px; }
-    button {
-      padding: 22px 55px; font-size: 1.7rem; border: none; border-radius: 70px;
-      cursor: pointer; font-weight: bold; transition: all 0.4s; min-width: 170px;
-      box-shadow: 0 15px 50px rgba(0,0,0,0.4);
+    .question {
+      font-size: clamp(1.2rem, 5vw, 2rem);
+      margin: 30px 0;
+      font-weight: bold;
+      color: #fff;
     }
-    #yesBtn { background: #4ade80; color: white; }
-    #yesBtn:hover { transform: translateY(-7px) scale(1.1); }
-    #noBtn { background: #ff5c5c; color: white; position: absolute; }
+
+    .buttons {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 40px;
+      position: relative;
+    }
+
+    button {
+      padding: 15px 35px;
+      font-size: clamp(1rem, 4vw, 1.5rem);
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      font-weight: bold;
+      min-width: 120px;
+      transition: all 0.3s ease;
+    }
+
+    #yesBtn {
+      background: #4ade80;
+      color: white;
+      box-shadow: 0 10px 30px rgba(74,222,128,0.5);
+    }
+
+    #yesBtn:hover {
+      transform: scale(1.1);
+    }
+
+    #noBtn {
+      background: #ff5c5c;
+      color: white;
+      position: absolute;
+      box-shadow: 0 10px 30px rgba(255,92,92,0.5);
+      transition: all 0.3s ease;
+    }
 
     .instagram {
-      margin-top: 60px; font-size: 1.8rem; opacity: 0; transition: all 1.5s;
-      background: rgba(0,0,0,0.5); padding: 30px; border-radius: 20px;
+      margin-top: 40px;
+      font-size: clamp(1rem, 4vw, 1.6rem);
+      opacity: 0;
+      transition: opacity 1s ease;
+      background: rgba(0,0,0,0.4);
+      padding: 20px;
+      border-radius: 15px;
     }
-    .instagram a { color: #ff69b4; text-decoration: none; font-weight: bold; }
 
+    .instagram a {
+      color: #ff69b4;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    /* Responsive */
     @media (max-width: 480px) {
-      h1 { font-size: 3.2rem; }
-      .question { font-size: 1.5rem; }
-      button { padding: 16px 40px; font-size: 1.3rem; }
+      .container { margin-top: 10vh; padding: 15px; }
+      .buttons { gap: 15px; }
+      button { padding: 12px 30px; }
     }
   </style>
 </head>
 <body>
 
-  <!-- OTOMATİK VİDEO (Hızlı, güzel, loop) -->
+  <!-- VİDEO -->
   <video id="bgVideo" autoplay loop muted playsinline>
     <source src="https://videos.pexels.com/video-files/854195/854195-hd_1920_1080_30fps.mp4" type="video/mp4">
   </video>
@@ -92,33 +138,53 @@
     </div>
   </div>
 
-  <!-- SENİN MP3 (SES) -->
-  <audio id="music" loop autoplay>
+  <!-- SENİN MP3 -->
+  <audio id="music" loop>
     <source src="ses.mp3" type="audio/mp3">
   </audio>
 
   <script>
     const noBtn = document.getElementById("noBtn");
-    function moveNoBtn() {
-      const x = Math.random() * (window.innerWidth - 180);
-      const y = Math.random() * (window.innerHeight - 180);
-      noBtn.style.left = x + "px";
-      noBtn.style.top = y + "px";
-      noBtn.style.position = "absolute";
-    }
-    noBtn.addEventListener("mouseover", moveNoBtn);
-    noBtn.addEventListener("click", (e) => { e.preventDefault(); moveNoBtn(); });
+    const yesBtn = document.getElementById("yesBtn");
+    const insta = document.getElementById("insta");
+    const audio = document.getElementById("music");
 
-    document.getElementById("yesBtn").addEventListener("click", () => {
-      document.getElementById("insta").style.opacity = "1";
-      document.getElementById("yesBtn").style.display = "none";
+    // HAYIR BUTONU KAÇIYOR (MOBİL + PC)
+    function moveNo() {
+      const maxX = window.innerWidth - noBtn.offsetWidth - 20;
+      const maxY = window.innerHeight - noBtn.offsetHeight - 20;
+      const x = Math.random() * maxX;
+      const y = Math.random() * maxY;
+      noBtn.style.left = x + 'px';
+      noBtn.style.top = y + 'px';
+    }
+
+    noBtn.addEventListener("mouseover", moveNo);
+    noBtn.addEventListener("touchstart", (e) => {
+      e.preventDefault();
+      moveNo();
+    });
+
+    // EVET → Instagram
+    yesBtn.addEventListener("click", () => {
+      insta.style.opacity = "1";
+      yesBtn.style.display = "none";
       noBtn.style.display = "none";
     });
 
-    // Mobil için MP3 çalsın
-    document.body.addEventListener("touchstart", () => {
-      document.getElementById("music").play().catch(() => {});
-    }, { once: true });
+    // MÜZİK ÇALSIN (MOBİL İÇİN DOKUNMA)
+    function playMusic() {
+      audio.volume = 0.4;
+      audio.play().catch(() => {});
+    }
+
+    document.body.addEventListener("click", playMusic, { once: true });
+    document.body.addEventListener("touchstart", playMusic, { once: true });
+
+    // Sayfa yüklendiğinde dene
+    window.addEventListener("load", () => {
+      setTimeout(playMusic, 500);
+    });
   </script>
 </body>
 </html>
