@@ -3,254 +3,122 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Tanışalım mı? ❤️</title>
-  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+  <title>NİDA ❤️</title>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@500;700&display=swap" rel="stylesheet">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      background: linear-gradient(135deg, #ff6b81, #ff8fa3);
-      overflow: hidden;
-      height: 100vh;
-      font-family: 'Poppins', sans-serif;
-      color: #fff;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      position: relative;
-      touch-action: manipulation;
+    body, html { height: 100%; overflow: hidden; }
+    
+    /* OTOMATİK VİDEO (GitHub dışı, hızlı yüklenir) */
+    #bgVideo {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      z-index: -1;
+      filter: brightness(0.75);
     }
 
     .container {
+      position: relative;
       z-index: 10;
+      text-align: center;
       padding: 20px;
       max-width: 90%;
+      backdrop-filter: blur(15px);
+      background: rgba(0,0,0,0.45);
+      border-radius: 30px;
+      box-shadow: 0 0 70px rgba(255,20,147,0.6);
+      margin-top: 20vh;
     }
 
     h1 {
-      font-family: 'Pacifico', cursive;
-      font-size: 2.8rem;
-      margin-bottom: 20px;
-      text-shadow: 0 0 20px rgba(255,20,147,0.8);
-      animation: pulse 2s infinite;
+      font-family: 'Dancing Script', cursive;
+      font-size: 5.2rem;
+      background: linear-gradient(45deg, #ff1493, #ff69b4, #fff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 50px #ff1493;
+      animation: neon 2s infinite;
     }
 
-    .question {
-      font-size: 1.8rem;
-      margin: 30px 0;
-      font-weight: bold;
+    @keyframes neon {
+      0%, 100% { text-shadow: 0 0 25px #ff1493; }
+      50% { text-shadow: 0 0 70px #ff1493, 0 0 140px #ff69b4; }
     }
 
-    .buttons {
-      display: flex;
-      gap: 20px;
-      justify-content: center;
-      flex-wrap: wrap;
-      margin-top: 30px;
-    }
-
+    .question { font-size: 2.1rem; margin: 40px 0; font-weight: bold; color: #fff; }
+    .buttons { display: flex; gap: 35px; justify-content: center; flex-wrap: wrap; margin-top: 50px; }
     button {
-      padding: 15px 30px;
-      font-size: 1.4rem;
-      border: none;
-      border-radius: 50px;
-      cursor: pointer;
-      font-weight: bold;
-      transition: all 0.3s;
-      min-width: 120px;
+      padding: 22px 55px; font-size: 1.7rem; border: none; border-radius: 70px;
+      cursor: pointer; font-weight: bold; transition: all 0.4s; min-width: 170px;
+      box-shadow: 0 15px 50px rgba(0,0,0,0.4);
     }
-
-    #yesBtn {
-      background: #4ade80;
-      color: white;
-      box-shadow: 0 10px 30px rgba(74,222,128,0.5);
-    }
-
-    #yesBtn:hover {
-      transform: scale(1.1);
-      box-shadow: 0 15px 40px rgba(74,222,128,0.8);
-    }
-
-    #noBtn {
-      background: #ff5c5c;
-      color: white;
-      position: absolute;
-      box-shadow: 0 10px 30px rgba(255,92,92,0.5);
-      transition: all 0.2s ease;
-    }
+    #yesBtn { background: #4ade80; color: white; }
+    #yesBtn:hover { transform: translateY(-7px) scale(1.1); }
+    #noBtn { background: #ff5c5c; color: white; position: absolute; }
 
     .instagram {
-      margin-top: 30px;
-      font-size: 1.5rem;
-      opacity: 0;
-      transition: opacity 1s;
+      margin-top: 60px; font-size: 1.8rem; opacity: 0; transition: all 1.5s;
+      background: rgba(0,0,0,0.5); padding: 30px; border-radius: 20px;
     }
-
-    .instagram a {
-      color: #fff;
-      text-decoration: underline;
-      font-weight: bold;
-    }
-
-    /* Kalp ve kar efektleri */
-    .heart {
-      position: absolute;
-      width: 50px;
-      height: 50px;
-      background: #ff1493;
-      transform: rotate(-45deg);
-      animation: float 5s infinite ease-in-out;
-      box-shadow: 0 0 20px #ff1493;
-      pointer-events: none;
-    }
-
-    .heart:before,
-    .heart:after {
-      content: '';
-      width: 50px;
-      height: 50px;
-      position: absolute;
-      border-radius: 50%;
-      background: #ff1493;
-    }
-
-    .heart:before { top: -25px; left: 0; }
-    .heart:after { left: 25px; top: 0; }
-
-    .snow {
-      position: absolute;
-      color: #fff;
-      font-size: 1.2rem;
-      animation: snow 8s linear infinite;
-      pointer-events: none;
-    }
-
-    @keyframes pulse {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.05); }
-    }
-
-    @keyframes float {
-      0% { transform: translateY(100vh) rotate(-45deg); opacity: 0; }
-      10% { opacity: 1; }
-      90% { opacity: 1; }
-      100% { transform: translateY(-100px) rotate(-45deg); opacity: 0; }
-    }
-
-    @keyframes snow {
-      0% { transform: translateY(-100px) rotate(0); opacity: 1; }
-      100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
-    }
+    .instagram a { color: #ff69b4; text-decoration: none; font-weight: bold; }
 
     @media (max-width: 480px) {
-      h1 { font-size: 2.2rem; }
-      .question { font-size: 1.4rem; }
-      button { padding: 12px 25px; font-size: 1.2rem; }
+      h1 { font-size: 3.2rem; }
+      .question { font-size: 1.5rem; }
+      button { padding: 16px 40px; font-size: 1.3rem; }
     }
   </style>
 </head>
 <body>
 
+  <!-- OTOMATİK VİDEO (Hızlı, güzel, loop) -->
+  <video id="bgVideo" autoplay loop muted playsinline>
+    <source src="https://videos.pexels.com/video-files/854195/854195-hd_1920_1080_30fps.mp4" type="video/mp4">
+  </video>
+
   <div class="container">
-    <h1 id="name">ELİF</h1>
+    <h1>NİDA</h1>
     <div class="question">Tanışalım mı? ❤️</div>
     
     <div class="buttons">
       <button id="yesBtn">EVET 😍</button>
-      <button id="noBtn">HAYIR 🙅‍♀️</button>
+      <button id="noBtn">HAYIR 🙈</button>
     </div>
 
     <div class="instagram" id="insta">
-      Harika! 😊 Bana <a href="https://instagram.com/kullanicin" target="_blank">Instagram'dan</a> yazabilirsin! 📸
+      Harika! 😊 Bana <a href="https://instagram.com/yusufkerem_4458" target="_blank">@yusufkerem_4458</a>'dan yaz! 📸
     </div>
   </div>
 
+  <!-- SENİN MP3 (SES) -->
   <audio id="music" loop autoplay>
-    <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_883a2d6b9c.mp3?filename=romantic-piano-11027.mp3" type="audio/mp3">
+    <source src="ses.mp3" type="audio/mp3">
   </audio>
 
   <script>
-    // === KIZIN ADI VE İNSTAGRAM LİNKİNİ BURAYA YAZ ===
-    const KIZ_ADI = "NİDA"; // ← DEĞİŞTİR
-    const INSTAGRAM_LINK = "https://instagram.com/yusufkerem_4458"; // ← KENDİ İNSTAGRAM LİNKİN
-    // =================================================
-
-    document.getElementById("name").textContent = KIZ_ADI;
-    document.querySelector("#insta a").href = INSTAGRAM_LINK;
-
     const noBtn = document.getElementById("noBtn");
-    const yesBtn = document.getElementById("yesBtn");
-    const instaDiv = document.getElementById("insta");
-
-    // HAYIR butonu kaçar!
-    noBtn.addEventListener("mouseover", () => {
-      const x = Math.random() * (window.innerWidth - noBtn.offsetWidth - 100) + 50;
-      const y = Math.random() * (window.innerHeight - noBtn.offsetHeight - 100) + 50;
+    function moveNoBtn() {
+      const x = Math.random() * (window.innerWidth - 180);
+      const y = Math.random() * (window.innerHeight - 180);
       noBtn.style.left = x + "px";
       noBtn.style.top = y + "px";
       noBtn.style.position = "absolute";
-    });
+    }
+    noBtn.addEventListener("mouseover", moveNoBtn);
+    noBtn.addEventListener("click", (e) => { e.preventDefault(); moveNoBtn(); });
 
-    noBtn.addEventListener("click", (e) => {
-      e.preventDefault();
-      // Mobil için tıklayınca da kaçsın
-      const x = Math.random() * (window.innerWidth - noBtn.offsetWidth - 100) + 50;
-      const y = Math.random() * (window.innerHeight - noBtn.offsetHeight - 100) + 50;
-      noBtn.style.left = x + "px";
-      noBtn.style.top = y + "px";
-    });
-
-    // EVET → Instagram göster
-    yesBtn.addEventListener("click", () => {
-      instaDiv.style.opacity = "1";
-      yesBtn.style.display = "none";
+    document.getElementById("yesBtn").addEventListener("click", () => {
+      document.getElementById("insta").style.opacity = "1";
+      document.getElementById("yesBtn").style.display = "none";
       noBtn.style.display = "none";
-      startEffects();
     });
 
-    // Müzik otomatik çalsın (mobil için kullanıcı etkileşimi gerek)
-    document.body.addEventListener("touchstart", startMusic, { once: true });
-    document.body.addEventListener("click", startMusic, { once: true });
-
-    function startMusic() {
-      const audio = document.getElementById("music");
-      audio.volume = 0.3;
-      audio.play().catch(() => {});
-    }
-
-    // Efektler (kalp + kar)
-    function startEffects() {
-      setTimeout(() => {
-        setInterval(createHeart, 400);
-        setInterval(createSnow, 300);
-      }, 500);
-    }
-
-    function createHeart() {
-      const h = document.createElement("div");
-      h.classList.add("heart");
-      h.style.left = Math.random() * 100 + "vw";
-      h.style.animationDuration = (Math.random() * 3 + 4) + "s";
-      document.body.appendChild(h);
-      setTimeout(() => h.remove(), 7000);
-    }
-
-    function createSnow() {
-      const s = document.createElement("div");
-      s.classList.add("snow");
-      s.textContent = "❅";
-      s.style.left = Math.random() * 100 + "vw";
-      s.style.animationDuration = (Math.random() * 5 + 5) + "s";
-      s.style.fontSize = Math.random() * 15 + 12 + "px";
-      document.body.appendChild(s);
-      setTimeout(() => s.remove(), 10000);
-    }
-
-    // Sayfa yüklendiğinde müzik dene
-    window.addEventListener("load", () => {
-      setTimeout(startMusic, 1000);
-    });
+    // Mobil için MP3 çalsın
+    document.body.addEventListener("touchstart", () => {
+      document.getElementById("music").play().catch(() => {});
+    }, { once: true });
   </script>
 </body>
 </html>
