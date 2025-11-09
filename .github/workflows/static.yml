@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sana Özel ❤️</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #000;
+      overflow: hidden;
+      height: 100vh;
+      font-family: 'Pacifico', cursive;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+
+    .container {
+      text-align: center;
+      z-index: 10;
+      transition: all 1s ease;
+    }
+
+    h1 {
+      font-size: 4.5rem;
+      margin-bottom: 15px;
+      text-shadow: 0 0 30px #ff1493, 0 0 60px #ff1493;
+      animation: glow 2s infinite alternate;
+      opacity: 0;
+    }
+
+    p {
+      font-size: 1.6rem;
+      max-width: 90%;
+      opacity: 0;
+      text-shadow: 0 0 10px rgba(255,20,147,0.8);
+    }
+
+    .start-btn {
+      font-size: 2.5rem;
+      padding: 20px 40px;
+      background: linear-gradient(45deg, #ff1493, #ff69b4);
+      border: none;
+      border-radius: 50px;
+      color: white;
+      cursor: pointer;
+      box-shadow: 0 10px 30px rgba(255,20,147,0.5);
+      transition: all 0.3s;
+      font-family: 'Pacifico', cursive;
+    }
+
+    .start-btn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 15px 40px rgba(255,20,147,0.8);
+    }
+
+    .countdown {
+      font-size: 8rem;
+      font-weight: bold;
+      text-shadow: 0 0 50px #ff1493;
+      opacity: 0;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 20;
+    }
+
+    .game-start {
+      font-size: 3rem;
+      opacity: 0;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 20;
+    }
+
+    /* Oyun efektleri */
+    .heart, .snow { display: none; }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 20px #ff1493; }
+      to { text-shadow: 0 0 50px #ff1493, 0 0 80px #ff69b4; }
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+    }
+
+    @keyframes float {
+      0% { transform: translateY(120vh) rotate(-45deg); opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { transform: translateY(-100px) rotate(-45deg); opacity: 0; }
+    }
+
+    @keyframes snow {
+      0% { transform: translateY(-100px) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+    }
+
+    @keyframes explode {
+      0% { transform: scale(0); opacity: 1; }
+      100% { transform: scale(3); opacity: 0; }
+    }
+
+    @keyframes countdownPulse {
+      0%, 100% { transform: translate(-50%, -50%) scale(1); }
+      50% { transform: translate(-50%, -50%) scale(1.5); }
+    }
+
+    .heart {
+      position: absolute;
+      width: 60px;
+      height: 60px;
+      background: #ff1493;
+      transform: rotate(-45deg);
+      animation: float 5s infinite ease-in-out;
+      box-shadow: 0 0 25px #ff1493;
+      cursor: pointer;
+    }
+
+    .heart:before,
+    .heart:after {
+      content: '';
+      width: 60px;
+      height: 60px;
+      position: absolute;
+      border-radius: 50%;
+      background: #ff1493;
+    }
+
+    .heart:before { top: -30px; left: 0; }
+    .heart:after { left: 30px; top: 0; }
+
+    .snow {
+      position: absolute;
+      color: #fff;
+      font-size: 1.5rem;
+      animation: snow 8s linear infinite;
+      pointer-events: none;
+    }
+
+    .boom {
+      position: absolute;
+      font-size: 3rem;
+      pointer-events: none;
+      animation: explode 1s forwards;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1 id="name">ELİF</h1>
+    <p id="message">Tanıştığımıza çok mutluyum ❤️ Hazır mısın?</p>
+    <button class="start-btn" onclick="startGame()">🎮 BAŞLAT 🎮</button>
+  </div>
+
+  <div class="countdown" id="countdown"></div>
+  <div class="game-start" id="gameStart">OYUN BAŞLIYOR! 💖</div>
+
+  <audio id="music" loop>
+    <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_883a2d6b9c.mp3?filename=romantic-piano-11027.mp3" type="audio/mp3">
+  </audio>
+
+  <script>
+    // === KIZIN ADI VE MESAJINI BURAYA YAZ ===
+    const KIZ_ADI = "ELİF";  // ← DEĞİŞTİR
+    const MESAJ = "Seninle tanışmak günümü güzelleştirdi, hazır mısın maceraya? ❤️"; // ← DEĞİŞTİR
+    // =========================================
+
+    document.getElementById("name").textContent = KIZ_ADI;
+    document.getElementById("message").textContent = MESAJ;
+
+    let gameStarted = false;
+
+    function startGame() {
+      if (gameStarted) return;
+      gameStarted = true;
+
+      // Butonu gizle
+      document.querySelector('.start-btn').style.opacity = '0';
+      document.querySelector('.container').style.opacity = '0';
+
+      // 3-2-1 sayaç
+      let count = 3;
+      const countdownEl = document.getElementById('countdown');
+      const interval = setInterval(() => {
+        countdownEl.textContent = count;
+        countdownEl.style.opacity = '1';
+        countdownEl.style.animation = 'countdownPulse 0.5s infinite';
+
+        if (count === 0) {
+          clearInterval(interval);
+          countdownEl.style.opacity = '0';
+          
+          // "OYUN BAŞLIYOR!" göster
+          document.getElementById('gameStart').style.opacity = '1';
+          setTimeout(() => {
+            document.getElementById('gameStart').style.opacity = '0';
+            startHeartsAndSnow();
+          }, 1000);
+        }
+        count--;
+      }, 1000);
+    }
+
+    function startHeartsAndSnow() {
+      // İsim ve mesajı göster
+      document.querySelector('h1').style.opacity = '1';
+      document.querySelector('p').style.opacity = '1';
+
+      // Müzik başlat
+      const audio = document.getElementById("music");
+      audio.volume = 0.3;
+      audio.play().catch(() => {});
+
+      // Kalp yağmuru
+      setInterval(() => {
+        const h = document.createElement("div");
+        h.classList.add("heart");
+        h.style.left = Math.random() * 100 + "vw";
+        h.style.animationDuration = (Math.random() * 3 + 4) + "s";
+        h.style.display = 'block';
+        h.onclick = () => explode(h);
+        document.body.appendChild(h);
+        setTimeout(() => h.remove(), 7000);
+      }, 400);
+
+      // Kar efekti
+      setInterval(() => {
+        const s = document.createElement("div");
+        s.classList.add("snow");
+        s.textContent = "❅";
+        s.style.left = Math.random() * 100 + "vw";
+        s.style.animationDuration = (Math.random() * 5 + 5) + "s";
+        s.style.fontSize = Math.random() * 20 + 15 + "px";
+        s.style.display = 'block';
+        document.body.appendChild(s);
+        setTimeout(() => s.remove(), 10000);
+      }, 300);
+    }
+
+    function explode(el) {
+      const boom = document.createElement("div");
+      boom.classList.add("boom");
+      boom.textContent = "💖";
+      boom.style.left = (el.offsetLeft + 30) + "px";
+      boom.style.top = (el.offsetTop + 30) + "px";
+      document.body.appendChild(boom);
+      el.remove();
+      setTimeout(() => boom.remove(), 1000);
+    }
+  </script>
+</body>
+</html>
